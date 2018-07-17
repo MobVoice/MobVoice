@@ -1,7 +1,8 @@
 {
   "name": "canyouhearme",
   "version": "0.1.0",
-  "private": true,
+  "description": "An Open Source Method of Peaceful Protest by Means of Peeling Priority Queue Representation.",  
+  "private": false,
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
