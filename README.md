@@ -1,3 +1,18 @@
+
+Foundation Story:As a user I can post my protests to a queue associated with a public event or item at 80 characters or less. Posts will be ranked in queue based on a 'likes' metric. At regular intervals, top items in queue will be removed from queue and communicated by a digital representative.
+
+The project is built using React, Node, Express, Sequelize, PostgreSQL.
+
+https://github.com/MobVoice/MobVoice
+
+
+
+***************
+
+This Project was initialized with Fullstack Academy's 'bones' starter repository.  The following is the bones README.
+
+***************
+
 # Hi, I'm bones
 
 I'm a happy little skeleton. You can clone me to use as a starter on your projects!
