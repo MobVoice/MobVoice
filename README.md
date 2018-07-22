@@ -9,7 +9,7 @@ https://github.com/MobVoice/MobVoice
 
 ***************
 
-This Project was initialized with Fullstack Academy's 'bones' starter repository.  The following is the bones README.
+This project was initialized with Fullstack Academy's 'bones' starter repository.  The following is the bones README.
 
 ***************
 
