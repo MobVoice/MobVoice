@@ -1,21 +1,12 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# Ignore all node_modules
+node_modules/*
 
-# dependencies
-/node_modules
+# ...except the symlink to ourselves.
+!node_modules/APP
 
-# testing
-/coverage
+# Compiled JS
+public/bundle.js
+public/bundle.js.map
 
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# NPM errors
+npm-debug.log
