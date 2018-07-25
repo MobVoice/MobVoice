@@ -9,9 +9,6 @@
   "scripts": {
     "dev": "node dev",
     "validate": "check-node-version --node '>= 7.0.0'",
-    "setup": "./bin/setup",
-    "prep": "npm run validate && npm run setup",
-    "postinstall": "npm run prep",
     "build": "webpack",
     "build-watch": "npm run build -- -w",
     "build-dev": "cross-env NODE_ENV=development npm run build-watch",
@@ -52,6 +49,7 @@
     "check-node-version": "^1.1.2",
     "concurrently": "^3.1.0",
     "cookie-session": "^2.0.0-alpha.1",
+    "dotenv": "^6.0.0",
     "enzyme": "^2.5.1",
     "express": "^4.14.0",
     "finalhandler": "^1.0.0",

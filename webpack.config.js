@@ -1,7 +1,7 @@
 'use strict'
 
 const LiveReloadPlugin = require('webpack-livereload-plugin')
-    , devMode = require('.').isDevelopment
+const { isDevelopment } = require('./config')
 
 /**
  * Fast source maps rebuild quickly during development, but only give a link
@@ -10,7 +10,7 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
  * usable stack traces. Set to `true` if you want to speed up development.
  */
 
-    , USE_FAST_SOURCE_MAPS = false
+const USE_FAST_SOURCE_MAPS = false
 
 module.exports = {
   entry: './app/main.jsx',
@@ -19,20 +19,23 @@ module.exports = {
     filename: './public/bundle.js'
   },
   context: __dirname,
-  devtool: devMode && USE_FAST_SOURCE_MAPS
-    ? 'cheap-module-eval-source-map'
-    : 'source-map',
+  devtool:
+    isDevelopment && USE_FAST_SOURCE_MAPS
+      ? 'cheap-module-eval-source-map'
+      : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '*']
   },
   module: {
-    rules: [{
-      test: /jsx?$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel-loader' // config in .babelrc
-    }]
+    rules: [
+      {
+        test: /jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader' // config in .babelrc
+      }
+    ]
   },
-  plugins: devMode
-    ? [new LiveReloadPlugin({appendScriptTag: true})]
+  plugins: isDevelopment
+    ? [new LiveReloadPlugin({ appendScriptTag: true })]
     : []
 }

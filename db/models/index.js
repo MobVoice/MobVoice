@@ -3,9 +3,9 @@
 // Require our models. Running each module registers the model into sequelize
 // so any other part of the application could call sequelize.model('User')
 // to get access to the User model.
+const {appName} = require('../../config')
 
-const app = require('APP')
-    , debug = require('debug')(`${app.name}:models`)
+const debug = require('debug')(`${appName}:models`)
     // Our model files export functions that take a database and return
     // a model. We call these functions "meta models" (they are models of
     // models).

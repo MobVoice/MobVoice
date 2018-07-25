@@ -9,16 +9,11 @@ const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
-// Bones has a symlink from node_modules/APP to the root of the app.
-// That means that we can require paths relative to the app root by
-// saying require('APP/whatever').
-//
-// This next line requires our root index.js:
-const pkg = require('APP')
+const {port, appName, isProduction, isTesting, sessionSecret} = require('../config')
 
 const app = express()
 
-if (!pkg.isProduction && !pkg.isTesting) {
+if (isProduction && isTesting) {
   // Logging middleware (dev only)
   app.use(require('volleyball'))
 }
@@ -37,7 +32,7 @@ module.exports = app
   // Cookie-session docs: https://www.npmjs.com/package/cookie-session
   .use(require('cookie-session')({
     name: 'session',
-    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+    keys: [sessionSecret || 'an insecure secret key'],
   }))
 
   // Body parsing middleware
@@ -81,9 +76,9 @@ if (module === require.main) {
   //
   // https://nodejs.org/api/modules.html#modules_accessing_the_main_module
   const server = app.listen(
-    pkg.port,
+    port,
     () => {
-      console.log(`--- Started HTTP Server for ${pkg.name} ---`)
+      console.log(`--- Started HTTP Server for ${appName} ---`)
       const { address, port } = server.address()
       const host = address === '::' ? 'localhost' : address
       const urlSafeHost = host.includes(':') ? `[${host}]` : host
