@@ -18,6 +18,7 @@ const debug = require('debug')(`${appName}:models`)
       Thing: require('./thing'),
       Favorite: require('./favorite'),
       // ---------- Add new models here ----------
+      Protest: require('./protest'),
     }
     , {mapValues} = require('lodash')
 
