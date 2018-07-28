@@ -47,7 +47,6 @@ describe('/api/auth', () => {
       ))
 
     describe('when logged in', () => {
-      // supertest agents persist cookies
       const agent = request.agent(app)
 
       beforeEach('log in', () => agent

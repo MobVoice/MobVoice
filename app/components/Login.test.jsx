@@ -1,11 +1,13 @@
 import React from 'react'
 import chai, {expect} from 'chai'
-chai.use(require('chai-enzyme')())
-import {shallow} from 'enzyme'
 import {spy} from 'sinon'
-chai.use(require('sinon-chai'))
-
+import Enzyme from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 import {Login} from './Login'
+const shallow = Enzyme.shallow
+chai.use(require('chai-enzyme')())
+chai.use(require('sinon-chai'))
+Enzyme.configure({ adapter: new Adapter() })
 
 /* global describe it beforeEach */
 describe('<Login />', () => {
