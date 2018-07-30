@@ -24,12 +24,18 @@ module.exports = require('express').Router()
   Protest.findOne({
     where: {id: req.params.id}
   })
-  .then((protest) => protest.increment(['likes'], {by: 1}))
-  .then(() => Protest.findAll({
-    order: [['likes', 'DESC']]
-  }))
+  .then((protest) => {
+    if (protest) {
+      return protest.increment(['likes'], {by: 1})
+    } else {
+      throw new Error('No protest found with matching id.')
+    }
+  })
   .then((protests) => {
-    res.status(201).json(protests)
+    res.sendstatus(204)
+  })
+  .catch((err) => {
+    res.status(400).json({error: err.message})
   })
 })
 
@@ -37,12 +43,18 @@ module.exports = require('express').Router()
   Protest.findOne({
     where: {id: req.params.id}
   })
-  .then((protest) => protest.decrement(['likes'], {by: 1}))
-  .then(() => Protest.findAll({
-    order: [['likes', 'DESC']]
-  }))
+  .then((protest) => {
+    if (protest) {
+      return protest.decrement(['likes'], {by: 1})
+    } else {
+      throw new Error('No protest found with matching id.')
+    }
+  })
   .then((protests) => {
-    res.status(201).json(protests)
+    res.sendstatus(204)
+  })
+  .catch((err) => {
+    res.status(400).json({error: err.message})
   })
 })
 
@@ -50,11 +62,17 @@ module.exports = require('express').Router()
   Protest.findOne({
     where: {id: req.params.id}
   })
-  .then((protest) => protest.destroy())
-  .then(() => Protest.findAll({
-    order: [['updated_at', 'DESC']]
-  }))
+  .then((protest) => {
+    if (protest) {
+      return protest.destroy()
+    } else {
+      throw new Error('No protest found with matching id.')
+    }
+  })
   .then((protests) => {
-    res.status(202).json(protests)
+    res.sendStatus(202)
+  })
+  .catch((err) => {
+    res.status(400).json({error: err.message})
   })
 })

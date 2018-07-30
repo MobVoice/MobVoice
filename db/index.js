@@ -14,9 +14,7 @@ const debug = require('debug')(`${appName}:db`) // DEBUG=your_app_name:db
 const chalk = require('chalk')
 const Sequelize = require('sequelize')
 const name = (databaseName || appName) + (isTesting ? '_test' : '')
-// const url =
-//   `postgres://${databaseUsername}:${databasePassword}@${databaseDomain}:${databasePort}/${databaseName}` ||
-//   `postgres://@localhost:5432/${name}`
+
 const url = databaseURL || 'postgres://localhost:5432/mobvoice'
 debug(chalk.yellow(`Opening database connection to ${url}`))
 const db = (module.exports = new Sequelize(url, {

@@ -37,4 +37,31 @@ describe('/api/protests', () => {
           .then(res => expect(res.body.length).to.eql(1))
       ))
   })
+
+  describe('PUT /protests/upvote/:id (protest)', () => {
+    it('error message generated when no protest found with matching id', () =>
+      request(app)
+        .put('/api/protests/upvote/0')
+        .expect(400)
+        .then(res => expect(res.body.error).to.eql('No protest found with matching id.'))
+      )
+  })
+
+  describe('PUT /protests/downvote/:id (protest)', () => {
+    it('error message generated when no protest found with matching id', () =>
+      request(app)
+        .put('/api/protests/downvote/0')
+        .expect(400)
+        .then(res => expect(res.body.error).to.eql('No protest found with matching id.'))
+      )
+  })
+
+  describe('DELETE /protests/:id (protest)', () => {
+    it('error message generated when no protest found with matching id', () =>
+      request(app)
+        .delete('/api/protests/0')
+        .expect(400)
+        .then(res => expect(res.body.error).to.eql('No protest found with matching id.'))
+      )
+  })
 })
