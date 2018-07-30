@@ -65,7 +65,7 @@ export default class App extends Component {
           downvoteProtest={this.downvoteProtest}
           deleteProtest={this.deleteProtest}
           />} />
-          <Redirect exact from="/" to="/potest" />
+          <Redirect exact from="/" to="/protest" />
           <Route component={NotFound} />
         </Switch>
       </React.Fragment>

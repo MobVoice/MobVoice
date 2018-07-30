@@ -31,8 +31,11 @@ module.exports = require('express').Router()
       throw new Error('No protest found with matching id.')
     }
   })
+  .then(() => Protest.findAll({
+    order: [['updated_at', 'DESC']]
+  }))
   .then((protests) => {
-    res.sendstatus(204)
+    res.status(200).json(protests)
   })
   .catch((err) => {
     res.status(400).json({error: err.message})
@@ -50,8 +53,11 @@ module.exports = require('express').Router()
       throw new Error('No protest found with matching id.')
     }
   })
+  .then(() => Protest.findAll({
+    order: [['updated_at', 'DESC']]
+  }))
   .then((protests) => {
-    res.sendstatus(204)
+    res.status(200).json(protests)
   })
   .catch((err) => {
     res.status(400).json({error: err.message})
@@ -70,7 +76,7 @@ module.exports = require('express').Router()
     }
   })
   .then((protests) => {
-    res.sendStatus(202)
+    res.status(202).json(protests)
   })
   .catch((err) => {
     res.status(400).json({error: err.message})
