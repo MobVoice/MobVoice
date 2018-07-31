@@ -1,7 +1,7 @@
 const request = require('supertest')
     , {expect} = require('chai')
-    , db = require('APP/db')
-    , app = require('./start')
+    , db = require('../../db')
+    , app = require('../../server/start')
 
 /* global describe it before afterEach */
 

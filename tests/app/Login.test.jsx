@@ -3,7 +3,7 @@ import chai, {expect} from 'chai'
 import {spy} from 'sinon'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {Login} from './Login'
+import {Login} from '../../app/components/Login'
 const shallow = Enzyme.shallow
 chai.use(require('chai-enzyme')())
 chai.use(require('sinon-chai'))

@@ -1,7 +1,7 @@
 import React from 'react'
 import chai, {expect} from 'chai'
 import Adapter from 'enzyme-adapter-react-16'
-import Jokes from './Jokes'
+import Jokes from '../../app/components/Jokes'
 import Enzyme from 'enzyme'
 
 const shallow = Enzyme.shallow

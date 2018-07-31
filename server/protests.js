@@ -1,4 +1,4 @@
-const db = require('APP/db')
+const db = require('../db')
 const Protest = db.model('protest')
 
 module.exports = require('express').Router()
