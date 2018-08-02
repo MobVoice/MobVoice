@@ -2,15 +2,12 @@
 
 const {INTEGER, STRING, TEXT} = require('sequelize')
 
-module.exports = db => db.define('protest', {
+module.exports = db => db.define('protests', {
   text: TEXT,
   color: STRING,
-  likes: {
-    type: INTEGER,
-    defaultValue: 0,
-  },
 })
 
-module.exports.associations = (Protest, {User, Favorite}) => {
+module.exports.associations = (Protest, {User, Vote}) => {
   Protest.belongsTo(User)
+  Protest.hasMany(Vote)
 }

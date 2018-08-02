@@ -1,4 +1,5 @@
 'use strict'
+// this is example code
 
 const {STRING} = require('sequelize')
 
