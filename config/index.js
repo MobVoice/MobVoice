@@ -6,6 +6,7 @@ const appName = process.env.APP_NAME
 const databaseDomain = process.env.DATABASE_DOMAIN
 const databasePort = process.env.DATABASE_PORT
 const databaseName = process.env.DATABASE_NAME
+const databaseURL = process.env.DATABASE_URL
 const databaseUsername = process.env.DATABASE_USERNAME
 const databasePassword = process.env.DATABASE_PASSWORD
 const sessionSecret = process.env.SESSION_SECRET
@@ -26,6 +27,7 @@ module.exports = {
   databaseDomain,
   databasePort,
   databaseName,
+  databaseURL,
   databaseUsername,
   databasePassword,
   sessionSecret,

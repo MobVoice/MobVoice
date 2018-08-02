@@ -1,10 +1,12 @@
 import React from 'react'
 import chai, {expect} from 'chai'
+import Adapter from 'enzyme-adapter-react-16'
+import Jokes from '../../app/components/Jokes'
+import Enzyme from 'enzyme'
+
+const shallow = Enzyme.shallow
+Enzyme.configure({ adapter: new Adapter() })
 chai.use(require('chai-enzyme')())
-
-import {shallow} from 'enzyme'
-
-import Jokes from './Jokes'
 
 /* global describe it beforeEach */
 describe('<Jokes />', () => {

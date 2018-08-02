@@ -16,7 +16,7 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
-import NotFound from './components/NotFound'
+import App from './App'
 
 const MobVoiceApp = connect(
   ({ auth }) => ({ user: auth })
@@ -27,11 +27,7 @@ const MobVoiceApp = connect(
         {user ? <WhoAmI/> : <Login/>}
       </nav>
       <main>
-        <Switch>
-          <Route path="/jokes" component={Jokes} />
-          <Redirect exact from="/" to="/jokes" />
-          <Route component={NotFound} />
-        </Switch>
+        <App/>
       </main>
     </div>
 )

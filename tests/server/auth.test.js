@@ -1,7 +1,7 @@
 const request = require('supertest')
 const {expect} = require('chai')
-const db = require('APP/db'), {User} = db
-const app = require('./start')
+const db = require('../../db'), {User} = db
+const app = require('../../server/start')
 
 const alice = {
   username: 'alice@secrets.org',
@@ -47,7 +47,6 @@ describe('/api/auth', () => {
       ))
 
     describe('when logged in', () => {
-      // supertest agents persist cookies
       const agent = request.agent(app)
 
       beforeEach('log in', () => agent
