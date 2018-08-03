@@ -24,11 +24,11 @@ describe('/api/protests', () => {
   )
 
   describe('POST /protests (protest)', () => {
-    it('succeeds with valid comment and color', () =>
+    it('fails when not authenticated', () =>
       request(app)
         .post('/api/protests')
         .send(protest)
-        .expect(201)
+        .expect(401)
       )
   })
 
@@ -42,40 +42,6 @@ describe('/api/protests', () => {
           })
       )
     )
-  })
-
-  describe('PUT /protests/upvote/:id (protest)', () => {
-    it('error message generated when no protest found with matching id', () =>
-      request(app)
-        .put('/api/protests/upvote/0')
-        .expect(400)
-        .then(res => expect(res.body.error).to.eql('No protest found with matching id.'))
-      )
-  })
-
-  describe('PUT /protests/upvote/:id (protest)', () => {
-    it('200 when successful', () =>
-      request(app)
-        .put(`/api/protests/upvote/${mockProtest.id}`)
-        .expect(200)
-      )
-  })
-
-  describe('PUT /protests/downvote/:id (protest)', () => {
-    it('error message generated when no protest found with matching id', () =>
-      request(app)
-        .put('/api/protests/downvote/0')
-        .expect(400)
-        .then(res => expect(res.body.error).to.eql('No protest found with matching id.'))
-      )
-  })
-
-  describe('PUT /protests/downvote/:id (protest)', () => {
-    it('200 when successful', () =>
-      request(app)
-        .put(`/api/protests/downvote/${mockProtest.id}`)
-        .expect(200)
-      )
   })
 
   describe('DELETE /protests/:id (protest)', () => {
