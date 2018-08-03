@@ -33,17 +33,15 @@ export default class App extends React.Component {
 
   render() {
     let list = this.props.protests
-    list.map((protest)=>{
+    list.map((protest) => {
       protest.voteCount = 0
-      protest.votes.forEach(vote=>{
-        if(vote.dir){
+      protest.votes.forEach(vote => {
+        if (vote.dir) {
           protest.voteCount+=parseInt(vote.dir)
         }
       })
     })
-    list = list.sort((a, b)=>{
-      return b.voteCount-a.voteCount;
-    })
+    list = list.sort((a, b) => b.voteCount-a.voteCount)
     return (
       <React.Fragment>
         <a target="_self" href="/api/auth/login/facebook"><i className="fa fa-facebook"/>facebook</a>
@@ -57,16 +55,15 @@ export default class App extends React.Component {
         <br/>
         {
           list.length
-          ?list.map(protest => {
-            return (
+          ?list.map(protest => (
             <div style={{backgroundColor: protest.color}} key={protest.id} id={protest.id}>
             <button id={`up${protest.id}`} onClick={this.props.voteProtest.bind(this, protest.id, 1, 'test subject')}>Up Vote</button>
               <button id={`dn${protest.id}`} onClick={this.props.voteProtest.bind(this, protest.id, -1, 'test subject')}>Dn Vote</button>
               <p>likes:{protest.voteCount}</p>
               <p>{protest.text}</p>
               <button id={`d${protest.id}`} onClick={this.props.deleteProtest.bind(this, protest)}>Delete</button>
-            </div>)}
-          )
+            </div>
+          ))
           :null
         }
       </React.Fragment>

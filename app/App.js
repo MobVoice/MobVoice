@@ -56,7 +56,7 @@ export default class App extends Component {
           protests={this.state.protests}
           getProtests={this.getProtests}
           addProtest={this.addProtest}
-          voteProtest={this.voteProtest}          
+          voteProtest={this.voteProtest}
           upvoteProtest={this.upvoteProtest}
           downvoteProtest={this.downvoteProtest}
           deleteProtest={this.deleteProtest}

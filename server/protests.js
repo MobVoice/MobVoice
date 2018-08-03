@@ -9,7 +9,7 @@ module.exports = require('express').Router()
 
 .get('/', (req, res, next) => {
   Protest.findAll({
-    include: {model: Vote}, 
+    include: {model: Vote},
   })
   .then((protests) => {
     res.status(200).json(protests)
@@ -17,20 +17,14 @@ module.exports = require('express').Router()
 })
 
 .post('/', mustBeLoggedIn, (req, res, next) => {
-  const user = req.user;
+  const user = req.user
   Protest.create(req.body)
-  .then((protest) => {
-    return User.findOne({where:{id:user.id}})
-    .then((user)=>{
-      return protest.setUser(user)
-    })
-    .then(()=>{
-      return Protest.findAll({
-        order: [['updated_at', 'DESC']]
-      })
-    })
-
-  })
+  .then((protest) => User.findOne({where: {id: user.id}})
+    .then((user) => protest.setUser(user))
+    .then(() => Protest.findAll({
+      order: [['updated_at', 'DESC']]
+    }))
+  )
   .then((protests) => {
     res.status(201).json(protests)
   })
