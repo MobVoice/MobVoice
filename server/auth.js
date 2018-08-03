@@ -10,7 +10,7 @@ const {
   googleClientSecret
 } = require('../config')
 const debug = require('debug')(`${appName}:auth`)
-
+console.log(facebookClientId, facebookClientSecret)
 /*************************
  * Auth strategies
  *
@@ -52,16 +52,16 @@ OAuth.setupStrategy({
 
 // Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
-OAuth.setupStrategy({
-  provider: 'google',
-  strategy: require('passport-google-oauth').OAuth2Strategy,
-  config: {
-    clientID: googleClientId,
-    clientSecret: googleClientSecret,
-    callbackURL: `${baseUrl}/api/auth/login/google`
-  },
-  passport
-})
+// OAuth.setupStrategy({
+//   provider: 'google',
+//   strategy: require('passport-google-oauth').OAuth2Strategy,
+//   config: {
+//     clientID: googleClientId,
+//     clientSecret: googleClientSecret,
+//     callbackURL: `${baseUrl}/api/auth/login/google`
+//   },
+//   passport
+// })
 
 // Other passport configuration:
 // Passport review in the Week 6 Concept Review:

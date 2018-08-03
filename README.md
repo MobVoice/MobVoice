@@ -6,7 +6,6 @@ The project is built using React, Node, Express, Sequelize, PostgreSQL.
 https://github.com/MobVoice/MobVoice
 
 
-
 ***************
 
 This project was initialized with Fullstack Academy's 'bones' starter repository.  The following is the bones README.
