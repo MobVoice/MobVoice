@@ -3,20 +3,15 @@ const {
   isTesting,
   isProduction,
   appName,
-  databaseDomain,
-  databasePort,
   databaseName,
-  databaseURL,
-  databaseUsername,
-  databasePassword
+  databaseURL
 } = require('../config')
 const debug = require('debug')(`${appName}:db`) // DEBUG=your_app_name:db
 const chalk = require('chalk')
 const Sequelize = require('sequelize')
 const name = (databaseName || appName) + (isTesting ? '_test' : '')
-const url = databaseURL || 'postgres://localhost:5432/mobvoice'
-debug(chalk.yellow(`Opening database connection to ${url}`))
-const db = (module.exports = new Sequelize(url, {
+debug(chalk.yellow(`Opening database connection to ${databaseURL}`))
+const db = (module.exports = new Sequelize(databaseURL, {
   logging: require('debug')('sql'), // export DEBUG=sql in the environment to
   // get SQL queries
   define: {
@@ -50,13 +45,13 @@ db.didSync = db.createAndSync()
 function createAndSync(force = isTesting, retries = 0, maxRetries = 5) {
   return db
     .sync({ force })
-    .then(() => debug(`Synced models to db ${url}`))
+    .then(() => debug(`Synced models to db ${databaseURL}`))
     .catch(fail => {
       // Don't do this auto-create nonsense in prod, or
       // if we've retried too many times.
       if (isProduction || retries > maxRetries) {
         console.error(chalk.red(`********** database error ***********`))
-        console.error(chalk.red(`    Couldn't connect to ${url}`))
+        console.error(chalk.red(`    Couldn't connect to ${databaseURL}`))
         console.error()
         console.error(chalk.red(fail))
         console.error(chalk.red(`*************************************`))

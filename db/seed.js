@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('APP/db')
+const db = require('../db')
     , {User, Thing, Favorite, Promise} = db
     , {mapValues} = require('lodash')
 
