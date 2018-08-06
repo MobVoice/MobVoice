@@ -14,6 +14,9 @@ module.exports = require('express').Router()
   .then((protests) => {
     res.status(200).json(protests)
   })
+  .catch((err) => {
+    res.status(400).json({error: err.message})
+  })
 })
 
 .post('/', mustBeLoggedIn, (req, res, next) => {
@@ -27,6 +30,9 @@ module.exports = require('express').Router()
   )
   .then((protests) => {
     res.status(201).json(protests)
+  })
+  .catch((err) => {
+    res.status(400).json({error: err.message})
   })
 })
 

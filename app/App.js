@@ -29,6 +29,10 @@ export default class App extends Component {
     })
   }
 
+  addNewUser = (user) => {
+    axios.post('api/users', user)
+  }
+
   voteProtest = (pid, dir, sm) => {
     // pid = protest id
     // dir = vote direction
@@ -60,6 +64,7 @@ export default class App extends Component {
           upvoteProtest={this.upvoteProtest}
           downvoteProtest={this.downvoteProtest}
           deleteProtest={this.deleteProtest}
+          user={this.props.user}
           />} />
           <Redirect exact from="/" to="/protest" />
           <Route component={NotFound} />

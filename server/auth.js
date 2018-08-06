@@ -10,7 +10,6 @@ const {
   googleClientSecret
 } = require('../config')
 const debug = require('debug')(`${appName}:auth`)
-console.log(facebookClientId, facebookClientSecret)
 /*************************
  * Auth strategies
  *

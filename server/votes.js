@@ -7,8 +7,6 @@ module.exports = require('express').Router()
 
 .post('/', (req, res, next) => {
   const {dir, pid, sm} = req.query
-  const user = req.user
-
   Vote.findOne({where: {pid, sm, user_id: req.user.id, protest_id: pid}})
   .then((vote) => {
     if (!vote) {
