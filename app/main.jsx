@@ -24,10 +24,10 @@ const MobVoiceApp = connect(
   ({ user, children }) =>
     <div>
       <nav>
-        {user ? <WhoAmI/> : <Login/>}
+        <div>***Placeholder Nav***</div>
       </nav>
       <main>
-        <App/>
+        <App user={user}/>
       </main>
     </div>
 )
