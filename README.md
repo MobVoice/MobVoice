@@ -6,6 +6,12 @@ The project is built using React, Node, Express, Sequelize, PostgreSQL.
 https://github.com/MobVoice/MobVoice
 
 
+Speaker initialization:
+if getting error something along the lines of... "../deps/mpg123/src/output/alsa.c:19:28: fatal error: alsa/asoundlib.h: No such file or directory compilation terminated. make: *** " during npm install then run the following command in linux
+
+sudo apt-get install libasound2-dev
+
+
 ***************
 
 This project was initialized with Fullstack Academy's 'bones' starter repository.  The following is the bones README.

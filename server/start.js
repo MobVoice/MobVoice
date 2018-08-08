@@ -8,6 +8,11 @@ const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
+var googleTTS = require('google-tts-api')
+googleTTS('hello world', 'en-gb', 1)
+.then((url)=>{
+  console.log(url)
+})
 
 const {port, appName, isProduction, isTesting, sessionSecret} = require('../config')
 
