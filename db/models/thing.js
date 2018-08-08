@@ -1,5 +1,5 @@
 'use strict'
-
+// this is example code
 const {STRING} = require('sequelize')
 
 module.exports = db => db.define('things', {

@@ -29,16 +29,15 @@ export default class App extends Component {
     })
   }
 
-  upvoteProtest = (protest) => {
-    axios.put(`/api/protests/upvote/${protest.id}`)
-    .then(res => res.data)
-    .then((protests) => {
-      this.getProtests()
-    })
+  addNewUser = (user) => {
+    axios.post('api/users', user)
   }
 
-  downvoteProtest = (protest) => {
-    axios.put(`/api/protests/downvote/${protest.id}`)
+  voteProtest = (pid, dir, sm) => {
+    // pid = protest id
+    // dir = vote direction
+    // sm = submob (like a subreddit), currently harcoded to 'test subject'
+    axios.post(`/api/votes?pid=${pid}&dir=${dir}&sm=${sm}`)
     .then(res => res.data)
     .then((protests) => {
       this.getProtests()
@@ -61,9 +60,11 @@ export default class App extends Component {
           protests={this.state.protests}
           getProtests={this.getProtests}
           addProtest={this.addProtest}
+          voteProtest={this.voteProtest}
           upvoteProtest={this.upvoteProtest}
           downvoteProtest={this.downvoteProtest}
           deleteProtest={this.deleteProtest}
+          user={this.props.user}
           />} />
           <Redirect exact from="/" to="/protest" />
           <Route component={NotFound} />
