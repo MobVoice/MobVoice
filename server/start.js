@@ -7,16 +7,18 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const morgan = require('morgan')
+const helmet = require('helmet')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
-const {port, appName, isProduction, isTesting, sessionSecret} = require('../config')
+const {port, appName, isProduction, sessionSecret} = require('../config')
 
 const app = express()
 
-if (isProduction && isTesting) {
-  // Logging middleware (dev only)
-  app.use(require('volleyball'))
-}
+// secure express app by setting security headers
+app.use(helmet())
+// logging middleware
+isProduction ? app.use(morgan('combined')) : app.use(morgan('dev'))
 
 // Pretty error prints errors all pretty.
 const prettyError = new PrettyError

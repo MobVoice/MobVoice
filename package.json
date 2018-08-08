@@ -55,7 +55,9 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.14.0",
     "finalhandler": "^1.0.0",
+    "helmet": "^3.13.0",
     "homedir": "^0.6.0",
+    "morgan": "^1.9.0",
     "nyc": "^12.0.2",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
@@ -99,7 +101,6 @@
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0",
-    "volleyball": "^1.4.1",
     "webpack": "^2.2.1",
     "webpack-livereload-plugin": "^0.10.0"
   }
