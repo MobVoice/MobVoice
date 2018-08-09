@@ -7,16 +7,29 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const {port, appName, isProduction, isTesting, sessionSecret} = require('../config')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
-var googleTTS = require('google-tts-api')
-googleTTS('hello world', 'en-gb', 1)
-.then((url)=>{
-  console.log(url)
+
+var app = express()
+var server = require('http').Server(app)
+var io = require('socket.io')(server)
+
+const tts = require('./tts')
+const phrase = async function() {
+  await tts('hello world')
+}
+
+io.on('connection', function(socket) {
+  console.log('connected')
 })
 
-const {port, appName, isProduction, isTesting, sessionSecret} = require('../config')
-
-const app = express()
+// emit tts every 3s
+setInterval(() => {
+  tts('hello world')
+  .then((res) => {
+    io.emit('protest', res)
+  })
+}, 3000)
 
 if (isProduction && isTesting) {
   // Logging middleware (dev only)
@@ -80,7 +93,7 @@ if (module === require.main) {
   // Start listening only if we're the main module.
   //
   // https://nodejs.org/api/modules.html#modules_accessing_the_main_module
-  const server = app.listen(
+  server.listen(
     port,
     () => {
       console.log(`--- Started HTTP Server for ${appName} ---`)

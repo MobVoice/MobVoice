@@ -3,6 +3,11 @@ import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom
 import Protest from './components/Protest'
 import NotFound from './components/NotFound'
 import axios from 'axios'
+const io = require('socket.io-client')
+const socket = io()
+socket.on('protest', (res) => {
+  console.log(res)
+})
 
 export default class App extends Component {
   constructor() {

@@ -27,7 +27,6 @@ const facebookClientId = process.env.FACEBOOK_CLIENT_ID
 const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET
 const googleClientId = process.env.GOOGLE_CLIENT_ID
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
-console.log("istesting", isTesting)
 module.exports = {
   port,
   appName,
