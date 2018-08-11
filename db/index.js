@@ -30,7 +30,6 @@ const db = (module.exports = new Sequelize(databaseURL, {
 //
 //   const {User, Product} = require('../db')
 //
-console.log(databaseName.toString())
 Object.assign(
   db,
   require('./models')(db),
