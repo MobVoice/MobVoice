@@ -4,7 +4,7 @@ const request = require('supertest')
     , app = require('../../server/start')
 
 /* global describe it before afterEach */
-console.log('DB',db)
+console.log('DB', db)
 describe('/api/users', () => {
   before('Await database sync', () => db.didSync)
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
