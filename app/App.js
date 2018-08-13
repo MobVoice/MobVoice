@@ -5,17 +5,21 @@ import NotFound from './components/NotFound'
 import axios from 'axios'
 const io = require('socket.io-client')
 const socket = io()
-socket.on('protest', (res) => {
-  console.log(res)
-})
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
       value: '',
-      protests: []
+      protests: [],
+      currentProtest: {}
     }
+  }
+
+  componentDidMount() {
+    socket.on('protest', (res) => {
+      this.setState({currentProtest: res})
+    })
   }
 
   getProtests = () => {
@@ -63,6 +67,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/protest" render={(props) => <Protest {...props}
           protests={this.state.protests}
+          currentProtest={this.state.currentProtest}
           getProtests={this.getProtests}
           addProtest={this.addProtest}
           voteProtest={this.voteProtest}

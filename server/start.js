@@ -32,7 +32,7 @@ setInterval(() => {
   .then((res) => {
     io.emit('protest', res)
   })
-}, 3000)
+}, 5000)
 
 // secure express app by setting security headers
 app.use(helmet())
