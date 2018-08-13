@@ -13,9 +13,9 @@ const helmet = require('helmet')
 const {port, appName, isProduction, sessionSecret} = require('../config')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
-var app = express()
-var server = require('http').Server(app)
-var io = require('socket.io')(server)
+const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 const tts = require('./tts')
 const phrase = async function() {

@@ -1,4 +1,4 @@
-var googleTTS = require('google-tts-api')
+const googleTTS = require('google-tts-api')
 
 module.exports = function(phrase) {
   const promise = new Promise((resolve, reject) => {

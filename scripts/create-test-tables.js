@@ -1,6 +1,6 @@
 'use strict'
-var args = require('../config')
-var db = require('../db')
+const args = require('../config')
+const db = require('../db')
 
 db.query('CREATE TABLE MOBVOICE_TEST')
 .then(() => {
