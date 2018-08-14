@@ -9,11 +9,30 @@ const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
 const morgan = require('morgan')
 const helmet = require('helmet')
-// PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 const {port, appName, isProduction, sessionSecret} = require('../config')
+// PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
+const tts = require('./tts')
+const phrase = async function() {
+  await tts('hello world')
+}
+
+io.on('connection', function(socket) {
+  console.log('connected')
+})
+
+// emit tts every 3s
+setInterval(() => {
+  tts('hello world')
+  .then((res) => {
+    io.emit('protest', res)
+  })
+}, 5000)
 
 // secure express app by setting security headers
 app.use(helmet())
@@ -77,7 +96,7 @@ if (module === require.main) {
   // Start listening only if we're the main module.
   //
   // https://nodejs.org/api/modules.html#modules_accessing_the_main_module
-  const server = app.listen(
+  server.listen(
     port,
     () => {
       console.log(`--- Started HTTP Server for ${appName} ---`)

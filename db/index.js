@@ -3,6 +3,7 @@ const {
   isTesting,
   isProduction,
   appName,
+  clearDB,
   databaseName,
   databaseURL
 } = require('../config')
@@ -42,7 +43,7 @@ Object.assign(
 db.didSync = db.createAndSync()
 
 // sync the db, creating it if necessary
-function createAndSync(force = isTesting, retries = 0, maxRetries = 5) {
+function createAndSync(force = clearDB, retries = 0, maxRetries = 5) {
   return db
     .sync({ force })
     .then(() => debug(`Synced models to db ${databaseURL}`))

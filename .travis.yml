@@ -1,4 +1,12 @@
 language: node_js
 node_js:
-  - "iojs"
   - "7"
+before_script:
+  - node scripts/create-test-tables.js
+services:
+  - postgresql
+
+postgres:
+  adapter: postgresql
+  database: mobvoice_test
+  username: postgres

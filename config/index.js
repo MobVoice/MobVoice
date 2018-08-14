@@ -22,15 +22,16 @@ const databaseURL = `postgres://${databaseUsername}${
 const isProduction = process.env.NODE_ENV === 'production'
 const isDevelopment = process.env.NODE_ENV === 'development'
 const isTesting = !!global.it
+const clearDB = process.env.RESET_DB
 // Auth configs
 const facebookClientId = process.env.FACEBOOK_CLIENT_ID
 const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET
 const googleClientId = process.env.GOOGLE_CLIENT_ID
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
-
 module.exports = {
   port,
   appName,
+  clearDB,
   databaseDomain,
   databasePort,
   databaseName,

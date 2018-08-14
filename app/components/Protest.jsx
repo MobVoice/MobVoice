@@ -9,9 +9,11 @@ export default class App extends React.Component {
     super()
     this.state = {
       value: '',
+      isMuted: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormChange=this.handleFormChange.bind(this)
+    this.toggleMuteVoice=this.toggleMuteVoice.bind(this)
   }
 
   handleFormChange(event) {
@@ -31,6 +33,16 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.props.getProtests()
+  }
+
+  componentDidUpdate(prevProps) {
+    const audio = document.getElementById('player')
+    audio.load()
+    audio.play()
+  }
+
+  toggleMuteVoice() {
+    this.setState({ isMuted: !this.state.isMuted })
   }
 
   render() {
@@ -56,6 +68,11 @@ export default class App extends React.Component {
           <br/>
           <input id="sub-btn" className="btn btn-primary width-50" type="submit" value="Submit" disabled={this.state.submitDisabled}/>
         </form>
+        <br/>
+        <audio id="player" muted={this.state.isMuted}>
+          <source src="/output.mp3" type="audio/mpeg"></source>
+        </audio>
+        <button onClick={this.toggleMuteVoice}>Mute/Unmute Protest Voice</button>
         <br/>
         {
           list.length
