@@ -11,6 +11,7 @@ if getting error something along the lines of... "../deps/mpg123/src/output/alsa
 
 sudo apt-get install libasound2-dev
 
+Additionally, one needs google api tts credentials in order to enable text to speech capabilities.  For instructions, please follow https://cloud.google.com/text-to-speech/docs/quickstart-client-libraries
 
 ***************
 
