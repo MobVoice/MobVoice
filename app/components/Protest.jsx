@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import LoginSignUp from './LoginSignUp'
 import WhoAmI from './WhoAmI'
+import Jokes from './Jokes'
 
 export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
       value: '',
-      isMuted: true
+      isMuted: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormChange=this.handleFormChange.bind(this)
@@ -39,6 +40,7 @@ export default class App extends React.Component {
     const audio = document.getElementById('player')
     audio.load()
     audio.play()
+
   }
 
   toggleMuteVoice() {
@@ -70,7 +72,7 @@ export default class App extends React.Component {
         </form>
         <br/>
         <audio id="player" muted={this.state.isMuted}>
-          <source src="/output.mp3" type="audio/mpeg"></source>
+          <source src={`/mobs/${this.props.currentProtest.file}`} type="audio/mpeg"></source>
         </audio>
         <button onClick={this.toggleMuteVoice}>Mute/Unmute Protest Voice</button>
         <br/>

@@ -16,6 +16,7 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import Banner from './components/Banner'
 import App from './App'
 
 const MobVoiceApp = connect(
@@ -23,12 +24,7 @@ const MobVoiceApp = connect(
 )(
   ({ user, children }) =>
     <div>
-      <nav>
-        <div>***Placeholder Nav***</div>
-      </nav>
-      <main>
         <App user={user}/>
-      </main>
     </div>
 )
 

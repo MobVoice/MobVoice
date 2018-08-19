@@ -44,7 +44,7 @@ class LoginSignUp extends React.Component {
     const formContainerStyle = {
       maxWidth: '370px',
       width: '100%',
-      margin: '130px auto',
+      margin: '30px auto',
       padding: '0',
       border: '1px solid #000',
       backgroundColor: '#fff'
@@ -69,7 +69,6 @@ class LoginSignUp extends React.Component {
 
     return (
       <div>
-        <a target="_self" href="/api/auth/login/facebook"><i />Sign in with Facebook.</a>
         <div style={formContainerStyle}>
           {this.state.showLogin
             ? (
@@ -126,6 +125,7 @@ class LoginSignUp extends React.Component {
                 </div>
               </React.Fragment>
             )}
+            <a target="_self" href="/api/auth/login/facebook"><i />Sign in with Facebook.</a>
         </div>
       </div>
     )
