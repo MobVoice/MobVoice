@@ -15,24 +15,26 @@ const {port, appName, isProduction, sessionSecret} = require('../config')
 
 const app = express()
 const server = require('http').Server(app)
-const io = require('socket.io')(server)
 
+
+//begin tts functionality
+const io = require('socket.io')(server)
 const tts = require('./tts')
-const phrase = async function() {
-  await tts('hello world')
-}
 
 io.on('connection', function(socket) {
   console.log('connected')
 })
-
+let i = 0;
 // emit tts every 3s
 setInterval(() => {
-  tts('hello world')
-  .then((res) => {
+  i++;
+  return tts('This is an emitted protest item from the server. This is item '+i+' in the queue.')
+  .then((res)=>{
+    console.log(res)
     io.emit('protest', res)
   })
-}, 5000)
+}, 10000)
+
 
 // secure express app by setting security headers
 app.use(helmet())
