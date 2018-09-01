@@ -54,7 +54,7 @@ export default class App extends React.Component {
         <nav>
           <Banner
             currentProtest={this.props.currentProtest}
-            muteRepresentative={this.toggleMuteVoice}
+            muteRepresentative={this.props.toggleMuteVoice}
             protestIsMuted={this.props.isMuted}
           />
           <AudioPlayer muted={this.props.protestIsMuted} src={this.props.currentProtest.file?`/mobs/${this.props.currentProtest.file}`:null}/>
