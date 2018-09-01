@@ -4,17 +4,17 @@ import axios from 'axios'
 import LoginSignUp from './LoginSignUp'
 import WhoAmI from './WhoAmI'
 import Jokes from './Jokes'
+import Banner from './Banner'
+import AudioPlayer from './AudioPlayer'
 
 export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      value: '',
-      isMuted: false
+      value: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormChange=this.handleFormChange.bind(this)
-    this.toggleMuteVoice=this.toggleMuteVoice.bind(this)
   }
 
   handleFormChange(event) {
@@ -36,17 +36,6 @@ export default class App extends React.Component {
     this.props.getProtests()
   }
 
-  componentDidUpdate(prevProps) {
-    const audio = document.getElementById('player')
-    audio.load()
-    audio.play()
-
-  }
-
-  toggleMuteVoice() {
-    this.setState({ isMuted: !this.state.isMuted })
-  }
-
   render() {
     let list = this.props.protests
     list.map((protest) => {
@@ -62,33 +51,39 @@ export default class App extends React.Component {
     const user = this.props.user
     return (
       <React.Fragment>
-        {user ? <WhoAmI/> : <LoginSignUp/>}
-        <h1>Sample protest component header</h1>
-        <form onSubmit={this.handleSubmit}>
-          <h5 className="nav-header">enter some info<br/></h5>
-          <input type="text" name="firstname" value={this.state.value} onChange={this.handleFormChange}/>
+        <nav>
+          <Banner
+            currentProtest={this.props.currentProtest}
+            muteRepresentative={this.toggleMuteVoice}
+            protestIsMuted={this.props.isMuted}
+          />
+          <AudioPlayer muted={this.props.protestIsMuted} src={this.props.currentProtest.file?`/mobs/${this.props.currentProtest.file}`:null}/>
+        </nav>
+        <h1 className="center">***Sample Room Name Here***</h1>
+        <form className="center" onSubmit={this.handleSubmit}>
+          <input className="protest-btn" type="submit" value="Submit" disabled={this.state.submitDisabled}/>
+          <input type="text" className="protest-input" name="protest" placeholder="Submit a Protest!" value={this.state.value} onChange={this.handleFormChange}/>
           <br/>
-          <input id="sub-btn" className="btn btn-primary width-50" type="submit" value="Submit" disabled={this.state.submitDisabled}/>
         </form>
         <br/>
-        <audio id="player" muted={this.state.isMuted}>
-          <source src={`/mobs/${this.props.currentProtest.file}`} type="audio/mpeg"></source>
-        </audio>
-        <button onClick={this.toggleMuteVoice}>Mute/Unmute Protest Voice</button>
         <br/>
-        {
-          list.length
-          ?list.map(protest => (
-            <div style={{backgroundColor: protest.color}} key={protest.id} id={protest.id}>
-            <button id={`up${protest.id}`} onClick={this.props.voteProtest.bind(this, protest.id, 1, 'test subject')}>Up Vote</button>
-              <button id={`dn${protest.id}`} onClick={this.props.voteProtest.bind(this, protest.id, -1, 'test subject')}>Dn Vote</button>
-              <p>Likes: {protest.voteCount}</p>
-              <p>{protest.text}</p>
-              <button id={`d${protest.id}`} onClick={this.props.deleteProtest.bind(this, protest)}>Delete</button>
-            </div>
-          ))
-          :null
-        }
+        <div className="protest-container">
+          {
+            list.length
+            ?list.map(protest => (
+              <div className="protest-bar" style={{backgroundColor: protest.color}} key={protest.id} id={protest.id}>
+                <div className="vote-btn-container">
+                  <button id={`up${protest.id}`} className="upvote" onClick={this.props.voteProtest.bind(this, protest.id, 1, 'test subject')}>Up Vote</button>
+                  <button id={`dn${protest.id}`} className="downvote" onClick={this.props.voteProtest.bind(this, protest.id, -1, 'test subject')}>Dn Vote</button>
+                </div>
+                <p>Likes: {protest.voteCount}</p>
+                <p>{protest.text}</p>
+                <button className="del-btn" id={`d${protest.id}`} onClick={this.props.deleteProtest.bind(this, protest)}>Delete</button>
+              </div>
+            ))
+            :null
+          }
+        </div>
       </React.Fragment>
     )
   }

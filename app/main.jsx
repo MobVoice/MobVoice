@@ -8,7 +8,7 @@
 import 'babel-polyfill'
 
 import React from 'react'
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, withRouter, Route, Redirect, Switch} from 'react-router-dom'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 
@@ -19,14 +19,14 @@ import WhoAmI from './components/WhoAmI'
 import Banner from './components/Banner'
 import App from './App'
 
-const MobVoiceApp = connect(
+const MobVoiceApp = withRouter(connect(
   ({ auth }) => ({ user: auth })
 )(
-  ({ user, children }) =>
+  ({ user, children, location, history }) =>
     <div>
-        <App user={user}/>
+        <App user={user} location={location} history={history}/>
     </div>
-)
+))
 
 render(
   <Provider store={store}>

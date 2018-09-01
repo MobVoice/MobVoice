@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 import Protest from './components/Protest'
+import Home from './components/Home'
 import NotFound from './components/NotFound'
-import Banner from './components/Banner'
+import Footer from './components/Footer'
 import axios from 'axios'
 const io = require('socket.io-client')
 const socket = io()
@@ -13,7 +14,8 @@ export default class App extends Component {
     this.state = {
       value: '',
       protests: [],
-      currentProtest: {}
+      currentProtest: {},
+      isMuted: false
     }
   }
 
@@ -21,6 +23,10 @@ export default class App extends Component {
     socket.on('protest', (res) => {
       this.setState({currentProtest: res})
     })
+  }
+
+  toggleMuteVoice=() => {
+    this.setState({ isMuted: !this.state.isMuted })
   }
 
   getProtests = () => {
@@ -47,7 +53,7 @@ export default class App extends Component {
     // pid = protest id
     // dir = vote direction
     // sm = submob (like a subreddit), currently harcoded to 'test subject'
-    
+
     axios.post(`/api/votes?pid=${pid}&dir=${dir}&sm=${sm}`)
     .then(res => res.data)
     .then((protests) => {
@@ -66,10 +72,11 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <nav>
-          <Banner currentProtest={this.state.currentProtest}/>      
-        </nav>
         <Switch>
+          <Route path="/home" render={(props) => <Home {...props}
+            history={this.props.history}
+            user={this.props.user}
+          />} />
           <Route path="/protest" render={(props) => <Protest {...props}
             protests={this.state.protests}
             currentProtest={this.state.currentProtest}
@@ -80,10 +87,12 @@ export default class App extends Component {
             downvoteProtest={this.downvoteProtest}
             deleteProtest={this.deleteProtest}
             user={this.props.user}
+            isMuted={this.state.isMuted}
           />} />
-          <Redirect exact from="/" to="/protest" />
+          <Redirect exact from="/" to="/home" />
           <Route component={NotFound} />
         </Switch>
+        <Footer history={this.props.history}/>
       </React.Fragment>
     )
   }
