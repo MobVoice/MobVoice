@@ -72,6 +72,9 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <nav>
+          <Banner currentProtest={this.state.currentProtest}/>      
+        </nav>
         <Switch>
           <Route path="/home" render={(props) => <Home {...props}
             history={this.props.history}
