@@ -25,18 +25,18 @@
   position: fixed;
   top: 0;
   width: 100%;
+  height:inherit;
   overflow: hidden;
-  height: 4rem;
   background-color: rgba(0, 0, 0, 0.9);
   padding-left: 100%;
   box-sizing: content-box;
 }
 .ticker-wrap .ticker {
   display: inline-block;
-  height: 4rem;
   line-height: 4rem;
   white-space: nowrap;
   padding-right: 100%;
+  height:inherit;
   box-sizing: content-box;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
@@ -52,8 +52,101 @@
   padding: 0 2rem;
   font-size: 2rem;
   color: white;
+  height: inherit;
 }
 
 nav{
-  height: 80px;
+  height:80px;
+  width:100%;
+}
+
+body{
+  margin:0;
+}
+
+#mute-btn{
+  position: absolute;
+  right: 0px;
+  background-color: white;
+  height: inherit;
+  width:80px;
+}
+
+.protest-btn{
+  color:white;
+  background-color:#4caf50;
+  border-radius:3px;
+  padding:4px 8px;
+}
+
+.protest-input{
+  border: 0;
+  border-bottom: 1px lightgrey solid;
+  margin-left: 10px;
+}
+
+.center{
+  text-align:center;
+}
+
+.upvote{
+  height:40px;
+  width:40px;
+  float:left;
+}
+
+.downvote{
+  height:40px;
+  width:40px;
+  float:left;
+}
+
+.vote-btn-container{
+  float:left;
+  height:80px;
+  width:40px;
+  margin-right:10px;
+}
+
+.float-right{
+  float:right;
+}
+
+.protest-bar{
+  height:80px;
+  border:solid lightgrey 1px;
+  margin-bottom: 3px;
+  border-radius: 3px;
+}
+
+.del-btn{
+  bottom:10px;
+  position:relative;
+  float:right;
+}
+
+.protest-container{
+  max-width:680px;
+  margin:auto;
+}
+
+p {
+  margin-top:0px;
+}
+
+.footer{
+  position:fixed;
+  bottom:0px;
+  display:inline-flex;
+  width:100%;
+}
+
+.ftr-btn{
+  width:100%;
+  height:60px;
+}
+
+.to-protest-room{
+  display:block;
+  margin:auto;
 }
