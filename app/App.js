@@ -94,7 +94,7 @@ export default class App extends Component {
           <Redirect exact from="/" to="/home" />
           <Route component={NotFound} />
         </Switch>
-        <Footer history={this.props.history}/>
+        <Footer history={this.props.history} user={this.props.user}/>
       </React.Fragment>
     )
   }

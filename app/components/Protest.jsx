@@ -60,11 +60,15 @@ export default class App extends React.Component {
           <AudioPlayer muted={this.props.protestIsMuted} src={this.props.currentProtest.file?`/mobs/${this.props.currentProtest.file}`:null}/>
         </nav>
         <h1 className="center">***Sample Room Name Here***</h1>
+        { 
+        this.props.user?
         <form className="center" onSubmit={this.handleSubmit}>
           <input className="protest-btn" type="submit" value="Submit" disabled={this.state.submitDisabled}/>
           <input type="text" className="protest-input" name="protest" placeholder="Submit a Protest!" value={this.state.value} onChange={this.handleFormChange}/>
           <br/>
         </form>
+        :<h3>User is logged out and unable to post & vote but can view room</h3>
+        }
         <br/>
         <br/>
         <div className="protest-container">

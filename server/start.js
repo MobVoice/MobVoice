@@ -29,7 +29,6 @@ setInterval(() => {
   i++
   return tts(i+' minutes have passed')
   .then((res) => {
-    console.log(res)
     io.emit('protest', res)
   })
 }, 60000)
