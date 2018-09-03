@@ -13,3 +13,6 @@ npm-debug.log
 
 # Ignore env
 .env
+
+# Ignore google creds
+gac.json
