@@ -8,7 +8,7 @@ export default class Home extends Component {
       <div>
         <h1 className="center">Welcome to MobVoice</h1>
         {!this.props.user ? <LoginSignUp/> : <WhoAmI/>}
-        {this.props.user ? <button className="to-protest-room" style={{marginTop:"15px"}} onClick={() => { this.props.history.push('/protest') }}>Go to protest room</button> : null}
+        {this.props.user ? <button className="to-protest-room" style={{marginTop: '15px'}} onClick={() => { this.props.history.push('/protest') }}>Go to protest room</button> : null}
       </div>
     )
   }
