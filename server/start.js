@@ -36,7 +36,6 @@ let i = 0
 // emit tts every 3s
 setInterval(() => {
   i++
-
   db.query('SELECT id, text, SUM(dir) AS like_count FROM protests INNER JOIN votes ON votes.protest_id=protests.id  GROUP BY id ORDER BY SUM(dir) DESC')
   .then((res) => {
     if (res && res[0] && res[0][0]) {
