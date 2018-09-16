@@ -10,7 +10,7 @@ const databaseUsername = process.env.DATABASE_USERNAME || ''
 const databasePassword = process.env.DATABASE_PASSWORD || ''
 const hasCredentials = databaseUsername && databasePassword
 const sessionSecret = process.env.SESSION_SECRET
-const baseUrl = process.env.BASE_URL || `http://localhost:${port}`
+const baseUrl = process.env.DATABASE_URL || `http://localhost:${port}`
 
 // Dynamically construct databaseURL based on what environment vars are set
 const databaseURL = `postgres://${databaseUsername}${
