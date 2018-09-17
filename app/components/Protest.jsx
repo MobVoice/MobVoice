@@ -40,13 +40,17 @@ export default class App extends React.Component {
     let list = this.props.protests
     list.map((protest) => {
       protest.voteCount = 0
+      protest.priority = 0
       protest.votes.forEach(vote => {
+        if (vote.dir && vote.created_at) {
+          protest.priority+=parseInt(vote.dir)
+        }
         if (vote.dir) {
           protest.voteCount+=parseInt(vote.dir)
         }
       })
     })
-    list = list.sort((a, b) => b.voteCount-a.voteCount)
+    list = list.sort((a, b) => b.priority-a.priority)
 
     const user = this.props.user
     return (
@@ -60,11 +64,14 @@ export default class App extends React.Component {
           <AudioPlayer muted={this.props.protestIsMuted} src={this.props.currentProtest.file?`/mobs/${this.props.currentProtest.file}`:null}/>
         </nav>
         <h1 className="center">***Sample Room Name Here***</h1>
-        <form className="center" onSubmit={this.handleSubmit}>
+        {this.props.user
+          ?<form className="center" onSubmit={this.handleSubmit}>
           <input className="protest-btn" type="submit" value="Submit" disabled={this.state.submitDisabled}/>
           <input type="text" className="protest-input" name="protest" placeholder="Submit a Protest!" value={this.state.value} onChange={this.handleFormChange}/>
           <br/>
         </form>
+        :<h3>User is logged out and unable to post & vote but can view room</h3>
+        }
         <br/>
         <br/>
         <div className="protest-container">

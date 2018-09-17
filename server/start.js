@@ -10,6 +10,14 @@ const finalHandler = require('finalhandler')
 const morgan = require('morgan')
 const helmet = require('helmet')
 
+/**/
+const db = require('../db')
+const Protest = db.model('protests')
+const User = db.model('users')
+const Votes = db.model('votes')
+const Sequelize = require('sequelize')
+/**/
+
 const {port, appName, isProduction, sessionSecret} = require('../config')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
@@ -23,14 +31,25 @@ const tts = require('./tts')
 io.on('connection', function(socket) {
   console.log('connected')
 })
+
 let i = 0
 // emit tts every 3s
 setInterval(() => {
   i++
-  return tts(i+' minutes have passed')
+
+  db.query('SELECT id, text, SUM(dir) AS like_count FROM protests INNER JOIN votes ON votes.protest_id=protests.id  GROUP BY id ORDER BY SUM(dir) DESC')
   .then((res) => {
-    console.log(res)
-    io.emit('protest', res)
+    if (res && res[0] && res[0][0]) {
+      const protest = res[0][0]
+      Protest.findOne({
+        where: {id: protest.id}
+      })
+      .then((inst) => inst.destroy())
+      return tts(protest.text)
+      .then((res) => {
+        io.emit('protest', res)
+      })
+    }
   })
 }, 60000)
 

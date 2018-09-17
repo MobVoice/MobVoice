@@ -45,7 +45,7 @@ db.didSync = db.createAndSync()
 // sync the db, creating it if necessary
 function createAndSync(force = clearDB, retries = 0, maxRetries = 5) {
   return db
-    .sync({ force })
+    .sync()
     .then(() => debug(`Synced models to db ${databaseURL}`))
     .catch(fail => {
       // Don't do this auto-create nonsense in prod, or

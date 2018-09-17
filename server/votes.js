@@ -6,11 +6,11 @@ const Vote = db.model('votes')
 module.exports = require('express').Router()
 
 .post('/', (req, res, next) => {
-  const {dir, pid, sm} = req.query
-  Vote.findOne({where: {pid, sm, user_id: req.user.id, protest_id: pid}})
+  const {dir, pid} = req.query
+  Vote.findOne({where: {pid, user_id: req.user.id, protest_id: pid}})
   .then((vote) => {
     if (!vote) {
-      return Vote.create({dir, pid, sm, user_id: req.user.id, protest_id: pid})
+      return Vote.create({dir, pid, user_id: req.user.id, protest_id: pid})
     } else {
       vote.dir = dir
       return vote.save()

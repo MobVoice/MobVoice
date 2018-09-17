@@ -19,7 +19,6 @@ export default class Banner extends Component {
         <div className="ticker-wrap">
           <div className="ticker">
             {this.state.protestArr.map((pText, i) => <div key = {`tick${i}`} className="ticker__item">{pText}</div>)}
-          }
           </div>
         </div>
         <button id="fullscreen" onClick={() => { console.log('fullscreen not yet implemented') }}>

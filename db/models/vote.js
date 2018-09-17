@@ -3,9 +3,8 @@
 const {INTEGER, STRING, TEXT, ENUM} = require('sequelize')
 
 module.exports = db => db.define('votes', {
-  dir: ENUM(1, -1),
+  dir: INTEGER,
   pid: STRING,
-  sm: STRING,
 })
 
 module.exports.associations = (Vote, {Protest, User}) => {
