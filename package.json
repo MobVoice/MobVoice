@@ -24,7 +24,7 @@
     "lint": "esw . --ignore-path .gitignore --ext '.js,.jsx'",
     "lint-watch": "npm run lint -- -w",
     "prepush": "npm run lint && npm run test",
-    "write-gac": "node write_gac.js"
+    "write-gac": "./node_modules/.bin/env-cmd .env node write_gac.js"
   },
   "repository": {
     "type": "git",
@@ -53,6 +53,7 @@
     "concurrently": "^3.1.0",
     "cookie-session": "^2.0.0-alpha.1",
     "dotenv": "^6.0.0",
+    "env-cmd": "^8.0.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.14.0",
