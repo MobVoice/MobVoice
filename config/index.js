@@ -15,7 +15,7 @@ const baseUrl = process.env.BASE_URL || `http://localhost:${port}`
 
 // Dynamically construct databaseURL based on what environment vars are set
 
-const databaseURL = dbUrl?dbUrl:`postgres://${databaseUsername}${
+const databaseURL = dbUrl||`postgres://${databaseUsername}${
   hasCredentials ? ':' : ''
 }${databasePassword}${
   hasCredentials ? '@' : ''
