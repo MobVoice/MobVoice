@@ -10,10 +10,12 @@ const databaseUsername = process.env.DATABASE_USERNAME || ''
 const databasePassword = process.env.DATABASE_PASSWORD || ''
 const hasCredentials = databaseUsername && databasePassword
 const sessionSecret = process.env.SESSION_SECRET
-const baseUrl = process.env.DATABASE_URL || `http://localhost:${port}`
+const dbUrl = process.env.DATABASE_URL
+const baseUrl = process.env.BASE_URL || `http://localhost:${port}`
 
 // Dynamically construct databaseURL based on what environment vars are set
-const databaseURL = `postgres://${databaseUsername}${
+
+const databaseURL = dbUrl?dbUrl:`postgres://${databaseUsername}${
   hasCredentials ? ':' : ''
 }${databasePassword}${
   hasCredentials ? '@' : ''
@@ -32,6 +34,7 @@ module.exports = {
   port,
   appName,
   clearDB,
+  baseUrl,
   databaseDomain,
   databasePort,
   databaseName,
@@ -39,7 +42,6 @@ module.exports = {
   databaseUsername,
   databasePassword,
   sessionSecret,
-  baseUrl,
   isProduction,
   isDevelopment,
   isTesting,
