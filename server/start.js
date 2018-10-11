@@ -21,6 +21,9 @@ const Sequelize = require('sequelize')
 const {port, appName, isProduction, sessionSecret} = require('../config')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
+const fs = require('fs')
+fs.writeFileSync('gac.json', process.env.GAC_JSON_TOKEN)
+
 const app = express()
 const server = require('http').Server(app)
 
