@@ -30,6 +30,7 @@
   background-color: rgba(0, 0, 0, 0.9);
   padding-left: 100%;
   box-sizing: content-box;
+  z-index: 1;
 }
 .ticker-wrap .ticker {
   display: inline-block;
@@ -65,11 +66,12 @@ body{
 }
 
 #mute-btn{
-  position: absolute;
+  position: fixed;
   right: 0px;
   background-color: white;
   height: inherit;
   width:80px;
+  z-index:2;
 }
 
 .protest-btn{
@@ -128,6 +130,7 @@ body{
 .protest-container{
   max-width:680px;
   margin:auto;
+  margin-bottom:120px;
 }
 
 p {
