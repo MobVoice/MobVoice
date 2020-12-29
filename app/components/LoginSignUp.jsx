@@ -42,12 +42,10 @@ class LoginSignUp extends React.Component {
 
   render() {
     const formContainerStyle = {
-      maxWidth: '370px',
+      maxWidth: '30rem',
       width: '100%',
       margin: '30px auto',
       padding: '0',
-      border: '1px solid #000',
-      backgroundColor: '#fff'
     }
     const toggleBtnStyle = {
       width: '50%',
@@ -68,7 +66,7 @@ class LoginSignUp extends React.Component {
     }
 
     return (
-      <div>
+      <div className='login-container'>
         <div style={formContainerStyle}>
           {this.state.showLogin
             ? (
@@ -76,9 +74,12 @@ class LoginSignUp extends React.Component {
                 <div style={{display: 'flex', border: '1px solid #000'}}>
                   <button style={toggleBtnLightStyle} onClick={this.toggleForm}>Signup</button>
                   <button style={toggleBtnStyle }>Login</button>
-                </div>
-                <div style={{border: '1px solid #000', padding: '20px 30px'}}>
-                  <h4 style={{marginBottom: '20px'}}>LOGIN</h4>
+                </div>                
+             
+                <div className="auth-form">
+                    <a className="auth-fbook" target="_self" href="/api/auth/login/facebook">                
+               {/* <img src="/../social-1/f_logo_RGB-Blue_58.png" alt="facebook logo"/> */}
+ Sign in with Facebook</a><h4 className='line-through'> <span> OR </span></h4>
                   <Login />
                 </div>
               </React.Fragment>
@@ -88,13 +89,13 @@ class LoginSignUp extends React.Component {
                   <button style={toggleBtnStyle}>Signup</button>
                   <button style={toggleBtnLightStyle} onClick={this.toggleForm} >Login</button>
                 </div>
-                <div style={{border: '1px solid #000', padding: '20px 30px'}}>
+                <div >
                   <h4 style={{marginBottom: '20px'}}>SIGN UP</h4>
                   <form onSubmit={this.onSignupSubmit}>
-                    <div>
-                      <h4>Name:</h4>
+                    <div className="form-child">
+                      <h4>Name</h4>
                       <input
-                        style={{width: '100%'}}
+                        className='form-style'
                         name="name"
                         type="text"
                         onChange={this.onChange}
@@ -102,18 +103,18 @@ class LoginSignUp extends React.Component {
                       />
                     </div>
                     <div>
-                      <h4>Email:</h4>
+                      <h4>Email</h4>
                       <input
-                        style={{width: '100%'}}
+                        className='form-style'
                         name="email"
                         type="email"
                         required
                       />
                     </div>
-                    <div>
-                      <h4>Password:</h4>
+                    <div className="form-child">
+                      <h4>Password</h4>
                       <input
-                        style={{width: '100%'}}
+                        className='form-style'
                         name="password"
                         type="password"
                         required
@@ -125,7 +126,6 @@ class LoginSignUp extends React.Component {
                 </div>
               </React.Fragment>
             )}
-            <a target="_self" href="/api/auth/login/facebook"><i />Sign in with Facebook.</a>
         </div>
       </div>
     )
