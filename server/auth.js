@@ -6,8 +6,8 @@ const {
   baseUrl,
   facebookClientId,
   facebookClientSecret,
-  ClientId,
-  ClientSecret,
+  googleClientId,
+  googleClientSecret,
 } = require("../config");
 const debug = require("debug")(`${appName}:auth`);
 /*************************
@@ -49,7 +49,7 @@ OAuth.setupStrategy({
   passport,
 });
 
-//  needs the _CLIENT_SECRET AND _CLIENT_ID
+//  needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
 // OAuth.setupStrategy({
 //   provider: '',

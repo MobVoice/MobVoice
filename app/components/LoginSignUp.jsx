@@ -42,7 +42,7 @@ class LoginSignUp extends React.Component {
 
   render() {
     const formContainerStyle = {
-      maxWidth: '30rem',
+      maxWidth: '400px',
       width: '100%',
       margin: '30px auto',
       padding: '0',
@@ -78,7 +78,7 @@ class LoginSignUp extends React.Component {
              
                 <div className="auth-form">
                     <a className="auth-fbook" target="_self" href="/api/auth/login/facebook">                
-               {/* <img src="/../social-1/f_logo_RGB-Blue_58.png" alt="facebook logo"/> */}
+                {/* <img src="../social/f_logo_RGB-Blue_58.png" alt="facebook logo"/>  */}
  Sign in with Facebook</a><h4 className='line-through'> <span> OR </span></h4>
                   <Login />
                 </div>

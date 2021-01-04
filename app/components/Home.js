@@ -6,7 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <h1 className="welcome">Welcome to MobVoice</h1>
+        <h1 className="center">Welcome to MobVoice</h1>
         {!this.props.user ? <LoginSignUp /> : <WhoAmI />}
         {this.props.user ? (
           <button

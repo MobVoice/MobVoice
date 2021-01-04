@@ -137,8 +137,8 @@ form h4 {
   border-bottom: 1px lightgrey solid;
   margin-left: 10px;
 }
-
-.welcome {
+/* text center */
+.center {
   text-align: center;
 }
 
