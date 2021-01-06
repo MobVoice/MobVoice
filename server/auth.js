@@ -1,15 +1,15 @@
-const passport = require('passport')
-const { User, OAuth } = require('../db')
-const auth = require('express').Router()
+const passport = require("passport");
+const { User, OAuth } = require("../db");
+const auth = require("express").Router();
 const {
   appName,
   baseUrl,
   facebookClientId,
   facebookClientSecret,
   googleClientId,
-  googleClientSecret
-} = require('../config')
-const debug = require('debug')(`${appName}:auth`)
+  googleClientSecret,
+} = require("../config");
+const debug = require("debug")(`${appName}:auth`);
 /*************************
  * Auth strategies
  *
@@ -39,103 +39,103 @@ const debug = require('debug')(`${appName}:auth`)
 // Facebook needs the FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET
 // environment variables.
 OAuth.setupStrategy({
-  provider: 'facebook',
-  strategy: require('passport-facebook').Strategy,
+  provider: "facebook",
+  strategy: require("passport-facebook").Strategy,
   config: {
     clientID: facebookClientId,
     clientSecret: facebookClientSecret,
-    callbackURL: `${baseUrl}/api/auth/login/facebook`
+    callbackURL: `${baseUrl}/api/auth/login/facebook`,
   },
-  passport
-})
+  passport,
+});
 
-// Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
+//  needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
 // OAuth.setupStrategy({
-//   provider: 'google',
-//   strategy: require('passport-google-oauth').OAuth2Strategy,
+//   provider: '',
+//   strategy: require('passport--oauth').OAuth2Strategy,
 //   config: {
-//     clientID: googleClientId,
-//     clientSecret: googleClientSecret,
-//     callbackURL: `${baseUrl}/api/auth/login/google`
+//     clientID: ClientId,
+//     clientSecret: ClientSecret,
+//     callbackURL: `${baseUrl}/api/auth/login/`
 //   },
 //   passport
 // })
 
 // Other passport configuration:
 // Passport review in the Week 6 Concept Review:
-// https://docs.google.com/document/d/1MHS7DzzXKZvR6MkL8VWdCxohFJHGgdms71XNLIET52Q/edit?usp=sharing
+// https://docs..com/document/d/1MHS7DzzXKZvR6MkL8VWdCxohFJHGgdms71XNLIET52Q/edit?usp=sharing
 passport.serializeUser((user, done) => {
-  done(null, user.id)
-})
+  done(null, user.id);
+});
 
 passport.deserializeUser((id, done) => {
-  debug('will deserialize user.id=%d', id)
+  debug("will deserialize user.id=%d", id);
   User.findById(id)
-    .then(user => {
-      if (!user) debug('deserialize retrieved null user for id=%d', id)
-      else debug('deserialize did ok user.id=%d', id)
-      done(null, user)
+    .then((user) => {
+      if (!user) debug("deserialize retrieved null user for id=%d", id);
+      else debug("deserialize did ok user.id=%d", id);
+      done(null, user);
     })
-    .catch(err => {
-      debug('deserialize did fail err=%s', err)
-      done(err)
-    })
-})
+    .catch((err) => {
+      debug("deserialize did fail err=%s", err);
+      done(err);
+    });
+});
 
 // require.('passport-local').Strategy => a function we can use as a constructor, that takes in a callback
 passport.use(
-  new (require('passport-local')).Strategy((email, password, done) => {
-    debug('will authenticate user(email: "%s")', email)
+  new (require("passport-local").Strategy)((email, password, done) => {
+    debug('will authenticate user(email: "%s")', email);
     User.findOne({
       where: { email },
-      attributes: { include: ['password_digest'] }
+      attributes: { include: ["password_digest"] },
     })
-      .then(user => {
+      .then((user) => {
         if (!user) {
-          debug('authenticate user(email: "%s") did fail: no such user', email)
-          return done(null, false, { message: 'Login incorrect' })
+          debug('authenticate user(email: "%s") did fail: no such user', email);
+          return done(null, false, { message: "Login incorrect" });
         }
-        return user.authenticate(password).then(ok => {
+        return user.authenticate(password).then((ok) => {
           if (!ok) {
-            debug('authenticate user(email: "%s") did fail: bad password')
-            return done(null, false, { message: 'Login incorrect' })
+            debug('authenticate user(email: "%s") did fail: bad password');
+            return done(null, false, { message: "Login incorrect" });
           }
           debug(
             'authenticate user(email: "%s") did ok: user.id=%d',
             email,
             user.id
-          )
-          done(null, user)
-        })
+          );
+          done(null, user);
+        });
       })
-      .catch(done)
+      .catch(done);
   })
-)
+);
 
-auth.get('/whoami', (req, res) => res.send(req.user))
+auth.get("/whoami", (req, res) => res.send(req.user));
 
 // POST requests for local login:
 auth.post(
-  '/login/local',
-  passport.authenticate('local', { successRedirect: '/' })
-)
+  "/login/local",
+  passport.authenticate("local", { successRedirect: "/" })
+);
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
-auth.get('/login/:strategy', (req, res, next) =>
+auth.get("/login/:strategy", (req, res, next) =>
   passport.authenticate(req.params.strategy, {
-    scope: 'email', // You may want to ask for additional OAuth scopes. These are
+    scope: "email", // You may want to ask for additional OAuth scopes. These are
     // provider specific, and let you access additional data (like
     // their friends or email), or perform actions on their behalf.
-    successRedirect: '/'
+    successRedirect: "/",
     // Specify other config here
   })(req, res, next)
-)
+);
 
-auth.post('/logout', (req, res) => {
-  req.logout()
-  res.redirect('/api/auth/whoami')
-})
+auth.post("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/api/auth/whoami");
+});
 
-module.exports = auth
+module.exports = auth;
